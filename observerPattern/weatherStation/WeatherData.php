@@ -32,7 +32,8 @@ class WeatherData implements Subject
     public function notifyObservers(): void
     {
         foreach ($this->observers as $o) {
-            $o->update($this->temperature, $this->humidity, $this->pressure);
+            // $o->update($this->temperature, $this->humidity, $this->pressure); // Push every data
+            $o->update(); // lets the observer pull the data it needs
         }
     }
 
@@ -46,5 +47,29 @@ class WeatherData implements Subject
         $this->humidity = $humidity;
         $this->pressure = $pressure;
         $this->measurementsChanged();
+    }
+
+    /**
+     * Get the value of temperature
+     */ 
+    public function getTemperature()
+    {
+        return $this->temperature;
+    }
+
+    /**
+     * Get the value of humidity
+     */ 
+    public function getHumidity()
+    {
+        return $this->humidity;
+    }
+
+    /**
+     * Get the value of pressure
+     */ 
+    public function getPressure()
+    {
+        return $this->pressure;
     }
 }
